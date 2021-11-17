@@ -8,6 +8,6 @@ import com.example.model.response.MealsCategoriesResponses
 class MealsCategoriesViewModel(private val repository: MealsRepository = MealsRepository()):ViewModel() {
 
     fun getMeals():List<MealResponse>{
-       return repository.getMeals().categories
+       return repository.getMeals()?.categories.orEmpty()
     }
 }

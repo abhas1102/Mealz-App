@@ -25,7 +25,8 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun MealsCategoriesScreen() {
     val viewModel:MealsCategoriesViewModel = viewModel() // special syntax to instantiate viewmodel in composable screen, viewmodel will not be reinstantiated all over the time when composable is rebuild
-    Text(text = "Hello Compose")
+    val meals = viewModel.getMeals()
+    Text(text = meals.toString())
 }
 
 @Preview(showBackground = true)
