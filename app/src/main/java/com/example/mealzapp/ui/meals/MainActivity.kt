@@ -3,6 +3,8 @@ package com.example.mealzapp.ui.meals
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
@@ -36,7 +38,12 @@ fun MealsCategoriesScreen() {
         val mealsFromTheApi = response?.categories
         rememberedMeals.value = mealsFromTheApi.orEmpty()
     }
-    Text(text = rememberedMeals.value.toString())
+    LazyColumn{
+        items(rememberedMeals.value){meals->
+            Text(text = meals.name)
+        }
+    }
+
 }
 
 @Preview(showBackground = true)
