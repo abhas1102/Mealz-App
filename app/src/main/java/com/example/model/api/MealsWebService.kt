@@ -20,12 +20,12 @@ class MealsWebService {
 
     }
 
-    fun getMeals():Call<MealsCategoriesResponses>{
+    suspend fun getMeals():MealsCategoriesResponses{
             return api.getMeals()
     }
 
     interface MealsApi{
         @GET("categories.php")
-        fun getMeals():Call<MealsCategoriesResponses>
+        suspend fun getMeals():MealsCategoriesResponses
     }
 }

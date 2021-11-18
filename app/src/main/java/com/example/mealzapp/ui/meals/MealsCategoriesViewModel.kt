@@ -7,10 +7,8 @@ import com.example.model.response.MealsCategoriesResponses
 
 class MealsCategoriesViewModel(private val repository: MealsRepository = MealsRepository()):ViewModel() {
 
-    fun getMeals(successCallBack:(response:MealsCategoriesResponses?)->Unit){
-        repository.getMeals {response ->
-           successCallBack(response)
-           
-       }
+    suspend fun getMeals():List<MealResponse>{
+      return  repository.getMeals().categories
+
     }
 }
