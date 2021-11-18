@@ -30,20 +30,21 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun MealsCategoriesScreen() {
     val viewModel:MealsCategoriesViewModel = viewModel() // special syntax to instantiate viewmodel in composable screen, viewmodel will not be reinstantiated all over the time when composable is rebuild
-    val rememberedMeals:MutableState<List<MealResponse>> = remember {
+    val meals = viewModel.mealsState.value
+   /* val rememberedMeals:MutableState<List<MealResponse>> = remember {
         mutableStateOf(emptyList<MealResponse>())
-    }
-    val coroutineScope = rememberCoroutineScope()
+    } */
+    //val coroutineScope = rememberCoroutineScope()
     //Launched Effect is called in composables to call anything once
-    LaunchedEffect(key1="GET_MEALS"){
+   /* LaunchedEffect(key1="GET_MEALS"){
 
         coroutineScope.launch(Dispatchers.IO) {
             val meals = viewModel.getMeals()
             rememberedMeals.value = meals
         }
-    }
+    } */
     LazyColumn{
-        items(rememberedMeals.value){meals->
+        items(meals){meals->
             Text(text = meals.name)
         }
     }
