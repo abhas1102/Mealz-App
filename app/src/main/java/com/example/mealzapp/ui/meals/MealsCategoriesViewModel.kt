@@ -13,7 +13,7 @@ import com.example.model.response.MealsCategoriesResponses
 import kotlinx.coroutines.*
 import kotlin.system.measureNanoTime
 
-class MealsCategoriesViewModel(private val repository: MealsRepository = MealsRepository()):ViewModel() {
+class MealsCategoriesViewModel(private val repository: MealsRepository = MealsRepository.getInstance()):ViewModel() {
    // private val mealsJob = Job()
     init {
        // val scope = CoroutineScope(mealsJob +Dispatchers.IO)

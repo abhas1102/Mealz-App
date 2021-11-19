@@ -22,9 +22,10 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import coil.compose.rememberImagePainter
 import com.example.mealzapp.ui.theme.MealzAppTheme
 import com.example.model.response.MealResponse
+import javax.security.auth.callback.Callback
 
 @Composable
-fun MealsCategoriesScreen() {
+fun MealsCategoriesScreen(navigationCallback: (String) -> Unit) {
     val viewModel:MealsCategoriesViewModel = viewModel() // special syntax to instantiate viewmodel in composable screen, viewmodel will not be reinstantiated all over the time when composable is rebuild
     val meals = viewModel.mealsState.value
     /* val rememberedMeals:MutableState<List<MealResponse>> = remember {
@@ -41,17 +42,17 @@ fun MealsCategoriesScreen() {
      } */
     LazyColumn(contentPadding = PaddingValues(16.dp)){
         items(meals){meals->
-            MealCategory(meals)
+            MealCategory(meals, navigationCallback)
         }
     }
 
 }
 @Composable
-fun MealCategory(meal:MealResponse){
+fun MealCategory(meal:MealResponse,navigationCallback: (String) -> Unit){
     var isExpanded by remember{ mutableStateOf(false)}
     Card(shape = RoundedCornerShape(10.dp), elevation = 2.dp,modifier = Modifier
         .fillMaxWidth()
-        .padding(top = 16.dp)) {
+        .padding(top = 16.dp).clickable { navigationCallback(meal.id) }) {
         Row(modifier = Modifier.animateContentSize()){
             //Image
             Image(
@@ -94,6 +95,6 @@ fun MealCategory(meal:MealResponse){
 @Composable
 fun DefaultPreview() {
     MealzAppTheme {
-        MealsCategoriesScreen()
+        MealsCategoriesScreen({ })
     }
 }

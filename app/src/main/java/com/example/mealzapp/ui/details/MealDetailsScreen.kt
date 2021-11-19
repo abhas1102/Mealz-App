@@ -15,15 +15,15 @@ import coil.transform.CircleCropTransformation
 import com.example.model.response.MealResponse
 
 @Composable
-fun MealDetailScreen(meal:MealResponse){
+fun MealDetailScreen(meal:MealResponse?){
     Column() {
         Row() {
             Card() {
-               Image(painter = rememberImagePainter(data = meal.imageUrl,
+               Image(painter = rememberImagePainter(data = meal?.imageUrl,
                builder = {transformations(CircleCropTransformation())}), contentDescription =null,
                modifier = Modifier.size(200.dp))
             }
-            Text(meal.name)
+            Text(meal?.name?:"default name")
         }
         Button(onClick = { /*TODO*/ }) {
             Text("Change state of meal profile picture")
