@@ -1,5 +1,6 @@
 package com.example.mealzapp.ui.meals
 
+import androidx.compose.animation.animateContentSize
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
@@ -8,6 +9,7 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.KeyboardArrowDown
 import androidx.compose.material.icons.filled.KeyboardArrowUp
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -50,7 +52,7 @@ fun MealCategory(meal:MealResponse){
     Card(shape = RoundedCornerShape(10.dp), elevation = 2.dp,modifier = Modifier
         .fillMaxWidth()
         .padding(top = 16.dp)) {
-        Row{
+        Row(modifier = Modifier.animateContentSize()){
             //Image
             Image(
                 painter = rememberImagePainter(meal.imageUrl),
@@ -74,10 +76,11 @@ fun MealCategory(meal:MealResponse){
 
 
             }
-            Icon(imageVector = Icons.Filled.KeyboardArrowUp, contentDescription = "Expand row icon",
+            Icon(imageVector = if(isExpanded) Icons.Filled.KeyboardArrowUp
+                else Icons.Filled.KeyboardArrowDown, contentDescription = "Expand row icon",
                 modifier = Modifier
                     .padding(16.dp)
-                    .align(Alignment.CenterVertically).clickable { isExpanded = !isExpanded })
+                    .align(if(isExpanded) Alignment.Bottom else Alignment.CenterVertically).clickable { isExpanded = !isExpanded })
 
     }
 
